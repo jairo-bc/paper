@@ -142,8 +142,7 @@ describe('Translator', () => {
             },
         }, loggerStub);
 
-        translator.translate('items_with_syntax_error', { count: 1 });
-
+        expect(() => translator.translate('items_with_syntax_error', { count: 1 })).to.throw(Error);
         expect(loggerStub.error.called).to.equal(true);
 
         done();
@@ -328,7 +327,7 @@ describe('Translator', () => {
             done();
         })
 
-        it('should not throw an error on compiling translation', done => {
+        it('should not throw an error on compiling translation (zero key is invalid for locale=en', done => {
             const flattenedLanguages = {
                 "en": {
                   "locale": "en",
@@ -345,7 +344,7 @@ describe('Translator', () => {
             const precompiledTranslations = Translator.precompileTranslations(flattenedLanguages);
             translator.setLanguage(precompiledTranslations)
             const result = translator.translate('items', {count: 0, term: 'product'});
-            expect(result).to.equal('0 results found for product');
+            expect(result).to.equal('{count, plural, zero{No results} one{# result} other{# results}} found for {term}');
 
             done();
         })
