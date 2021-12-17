@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "lint-and-fix": "eslint . --fix",
     "test": "lab -v -t 94 --ignore i18n,WebAssembly,SharedArrayBuffer,Atomics,BigUint64Array,BigInt64Array,BigInt,URL,URLSearchParams,TextEncoder,TextDecoder,queueMicrotask,FinalizationRegistry,WeakRef,plural,en,number,select spec",
-    "coverage": "lab -c -r console -o stdout -r html -o coverage.html spec"
+    "coverage": "lab -c -r console -o stdout -r html -o coverage.html spec",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -26,12 +28,14 @@
   "dependencies": {
     "@bigcommerce/stencil-paper-handlebars": "4.4.9",
     "@messageformat/core": "^3.0.0",
-    "accept-language-parser": "~1.4.1"
+    "accept-language-parser": "~1.4.1",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "code": "~4.0.0",
     "eslint": "^7.8.1",
     "lab": "~13.0.1",
     "sinon": "~7.5.0"
-  }
+  },
+  "snyk": true
 }
